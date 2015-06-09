@@ -20,20 +20,20 @@ Linux分区过小，想将Windows下的一个不用的区分出一部分空间�
 
 首先检索grub rescue，结果很多，总结步骤如下：
 
-1. 先输入ls回车，查看显示的内容。如：
+1.先输入ls回车，查看显示的内容。如：
 
 <pre><code class="shell">(hd0)  (hd0,msdos14) (hd0,msdos13) (hd0,msdos12)....
 </code></pre>
 
-2. 然后找出哪个盘安装了系统，尝试所有的，直到返回内容不再是error: unknown filesystem.为止。
+2.然后找出哪个盘安装了系统，尝试所有的，直到返回内容不再是error: unknown filesystem.为止。
 
 <pre><code class="shell">ls (hd0,msdos1)/boot
 ls (hd0,msdos2)/boot
 </code></pre>
 
-3. 如果出现包含img文件的目录，即为linux系统所在目录，也是grub2所在目录
+3.如果出现包含img文件的目录，即为linux系统所在目录，也是grub2所在目录
 
-4. 然后设置grub2启动
+4.然后设置grub2启动
 
 <pre><code class="shell">set root=(hd0,msdos13)/boot/grub2
 set prefix=(hd0,msdos13)/boot/grub2
@@ -41,7 +41,7 @@ insmod normal
 normal
 </code></pre>
 
-5. 便进入之前的引导界面了。
+5.便进入之前的引导界面了。
  
 但是这只是临时的办法，还需要修复grub之后才能完全解决这一问题，否则重启还会出现一样的界面。这里我因为还要进行扩容，所以就没有直接修复grub，而是先研究扩容去了。
 
