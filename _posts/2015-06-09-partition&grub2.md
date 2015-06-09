@@ -20,24 +20,25 @@ Linux分区过小，想将Windows下的一个不用的区分出一部分空间�
 
 首先检索grub rescue，结果很多，总结步骤如下：
 
-- 先输入ls回车，查看显示的内容。如：
+1. 先输入ls回车，查看显示的内容。如：
 
-> (hd0)  (hd0,msdos14) (hd0,msdos13) (hd0,msdos12)....
+    (hd0)  (hd0,msdos14) (hd0,msdos13) (hd0,msdos12)....
 
-- 然后找出哪个盘安装了系统，尝试所有的，直到返回内容不再是error: unknown filesystem.为止。
+2. 然后找出哪个盘安装了系统，尝试所有的，直到返回内容不再是error: unknown filesystem.为止。
 
-> ls (hd0,msdos1)/boot
-> ls (hd0,msdos2)/boot
+    ls (hd0,msdos1)/boot
+    ls (hd0,msdos2)/boot
 
-- 如果出现包含img文件的目录，即为linux系统所在目录，也是grub2所在目录
-- 然后设置grub2启动
+3. 如果出现包含img文件的目录，即为linux系统所在目录，也是grub2所在目录
 
-> set root=(hd0,msdos13)/boot/grub2
-> set prefix=(hd0,msdos13)/boot/grub2
-> insmod normal
-> normal
+4. 然后设置grub2启动
 
-- 便进入之前的引导界面了。
+    set root=(hd0,msdos13)/boot/grub2
+    set prefix=(hd0,msdos13)/boot/grub2
+    insmod normal
+    normal
+
+5. 便进入之前的引导界面了。
  
 但是这只是临时的办法，还需要修复grub之后才能完全解决这一问题，否则重启还会出现一样的界面。这里我因为还要进行扩容，所以就没有直接修复grub，而是先研究扩容去了。
 
@@ -51,12 +52,12 @@ Linux分区过小，想将Windows下的一个不用的区分出一部分空间�
 
 正当我满心欢喜打算按照之前的方法进入系统再修复grub的时候，发现Linux系统卡在“Reached Target”这样一句话，无法进入系统，这真是当头一桶凉水。
 
-> Reached target Initrd File Systems
-> Reached target Initrd Default Target
+    Reached target Initrd File Systems
+    Reached target Initrd Default Target
 
 进行检索之后发现如果等几分钟，系统会出现别的错误信息，我的大致是
 
->ALERT! /dev/disk/by-uuid/xxxxxxxxx does not exist. Dropping to a shell
+    ALERT! /dev/disk/by-uuid/xxxxxxxxx does not exist. Dropping to a shell
 initramfs:_
 
 没办法，继续检索，试验解决方案。
@@ -64,14 +65,15 @@ initramfs:_
 在这期间，我也明白了这是什么缘故。因为我改变了swap分区的大小和位置（之前在windows下移动了swap，也改变了大小），导致swap分区的uuid失效了，而linux启动过程中是会按照之前记录的swap分区的uuid进行挂载等操作的，比如/etc/fstab文件里就进行了挂载操作，但是应该不止于此，因为我在liveCD里改了这个文件也并没有修复问题。
 
 那么最终的解决方案是在[这里](http://askubuntu.com/questions/516217/alert-dev-disk-by-uuid-xxxxxxxxx-does-not-exist-dropping-to-a-shell)，Ubuntu下的代码为：
-> sudo mount /dev/sda1 /mnt
-> sudo mount --bind /dev /mnt/dev
-> sudo mount --bind /proc /mnt/proc
-> sudo mount --bind /sys /mnt/sys
-> sudo chroot /mnt
-> update-initramfs -u
-> update-grub
-> reboot
+
+    sudo mount /dev/sda1 /mnt
+    sudo mount --bind /dev /mnt/dev
+    sudo mount --bind /proc /mnt/proc
+    sudo mount --bind /sys /mnt/sys
+    sudo chroot /mnt
+    update-initramfs -u
+    update-grub
+    reboot
 
 我又满心欢喜地去LiveCD里进行如法炮制，结果在chroot的时候又报错了，提示执行文件格式不正确。
 
@@ -83,21 +85,21 @@ initramfs:_
 
 好吧，这是Ubuntu的命令，我得找Fedora下等价的，如下：
 
-> dracut -f /boot/initramfs-currentimage
-> grub2-mkconfig -o "$(readlink /etc/grub2.conf)"
+    dracut -f /boot/initramfs-currentimage
+    grub2-mkconfig -o "$(readlink /etc/grub2.conf)"
 
 然后重启，还得再输一遍
 
-> set root=(hd0,msdos13)/boot/grub2
-> set prefix=(hd0,msdos13)/boot/grub2
-> insmod normal
-> normal
+    set root=(hd0,msdos13)/boot/grub2
+    set prefix=(hd0,msdos13)/boot/grub2
+    insmod normal
+    normal
 
 终于，成功进入了系统！
 
 之后一点收尾工作，修复grub2，命令如下（因为我的系统在第二块硬盘上，所以是sdb，另外这里不需要写数字，比如sdb2之类的）：
 
-> sudo /sbin/grub2-install /dev/sdb
+    sudo /sbin/grub2-install /dev/sdb
 
 ---
 
