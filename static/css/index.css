@@ -236,8 +236,8 @@ footer .point{
  * post articles area
  */
 .post{
-	padding:10px 30px;
-	font-size: 16px;
+	padding:30px 50px;
+	font-size: 14px;
 	line-height: 1.5;
 	/* -webkit-text-size-adjust: 100%; */
 }
@@ -262,7 +262,7 @@ blockquote {
     color: #444;
     border-left: 5px solid #D6DBDF;
     padding-left: 15px;
-    font-size: 16px;
+    font-size: 14px;
     background: rgba(112,138,153,.1);
     /*font-style: italic;*/
 }
