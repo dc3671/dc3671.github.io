@@ -22,21 +22,27 @@ Linux分区过小，想将Windows下的一个不用的区分出一部分空间�
 
 1. 先输入ls回车，查看显示的内容。如：
 
+```
     (hd0)  (hd0,msdos14) (hd0,msdos13) (hd0,msdos12)....
+```
 
 2. 然后找出哪个盘安装了系统，尝试所有的，直到返回内容不再是error: unknown filesystem.为止。
 
+```
     ls (hd0,msdos1)/boot
     ls (hd0,msdos2)/boot
+```
 
 3. 如果出现包含img文件的目录，即为linux系统所在目录，也是grub2所在目录
 
 4. 然后设置grub2启动
 
+```
     set root=(hd0,msdos13)/boot/grub2
     set prefix=(hd0,msdos13)/boot/grub2
     insmod normal
     normal
+```
 
 5. 便进入之前的引导界面了。
  
