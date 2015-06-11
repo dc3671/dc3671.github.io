@@ -247,6 +247,7 @@ footer .point{
 .post h1{
 	font-size: 32px;
 	font-family: SimHei;
+	font-weight: bold;
 }
 
 .post h2{
