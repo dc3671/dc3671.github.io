@@ -245,9 +245,7 @@ footer .point{
 }
 
 .post h1{
-	font-size: 32px;
-	font-family: SimHei;
-	font-weight: bold;
+	font-size: 32px;	
 }
 
 .post h2{
@@ -261,6 +259,7 @@ footer .point{
 .post h1, h2, h3{
 	margin-top: 32px;
 	margin-bottom: 12px;
+	font-weight: bold;
 }
 
 .post img{
