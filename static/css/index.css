@@ -239,12 +239,27 @@ footer .point{
 .post{
 	padding:30px 50px;
 	font-size: 14px;
-	line-height: 1.5;
+	line-height: 1.7;
+	font-family: "lucida grande","lucida sans unicode",lucida,helvetica,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
 	/* -webkit-text-size-adjust: 100%; */
 }
 
-.post h4{
-	font-weight: bold;
+.post h1{
+	font-size: 32px;
+	font-family: SimHei;
+}
+
+.post h2{
+	font-size: 23px;
+}
+
+.post h3{
+	font-size: 16px;
+}
+
+.post h1, h2, h3{
+	margin-top: 32px;
+	margin-bottom: 12px;
 }
 
 .post img{
