@@ -56,7 +56,17 @@ read all the images into memory as RDD and my method is as following:
 
 过程中遇到跟新的gcc-4.6.2.6冲突，手动回退到4.6.2.1，利用上面的rpm --erase --nodeps删除，再用yum重装指定版本即可。
 
+用union合并多个数据：
+
+    scala> val rdd = sc.parallelize(List(('a',1),('a',2)))
+    scala> val rdd2 = sc.parallelize(List(('b',1),('b',2)))
+    scala> rdd union rdd2
+    scala> res3.collect
+    res4: Array[(Char, Int)] = Array((a,1), (a,2), (b,1), (b,2))
+
 ## 初步尝试
+
+### 减少非必要输出
 
 根据[教程](http://blog.jobbole.com/86232/)的指示，先配置一下。
 
@@ -79,3 +89,7 @@ Spark（和PySpark）的执行可以特别详细，很多INFO日志消息都会�
      log4j.logger.org.apache.spark.repl.SparkILoop$SparkILoopInterpreter=WARN
 
 现在运行PySpark，输出消息将会更简略！
+
+### 代码过程
+
+为了将输入的data正确地转化成RDD，需要先json.load，之后再把二维list进行sc.parallelize，从而可以对二维list里的每一行进行map操作。
