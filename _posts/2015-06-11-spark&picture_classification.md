@@ -93,3 +93,11 @@ Spark（和PySpark）的执行可以特别详细，很多INFO日志消息都会�
 ### 代码过程
 
 为了将输入的data正确地转化成RDD，需要先json.load，之后再把二维list进行sc.parallelize，从而可以对二维list里的每一行进行map操作。
+
+Spark也有同步互斥问题！！！一批worker所得到的参数可能不一样
+
+np.array(map((lambda k:
+            ((k < 3) and [signal.fftconvolve(x[k], np.rot90(net[i].w[k][cell]), 'valid')])[0]
+        ), range(in_num)))  
+
+其中in_num是外部一个会修改的变量，在此处应该是3，在实际运行中，会显示`k`大于2！
