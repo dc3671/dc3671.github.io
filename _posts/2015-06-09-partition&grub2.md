@@ -60,8 +60,7 @@ normal
 
 进行检索之后发现如果等几分钟，系统会出现别的错误信息，我的大致是
 
-    ALERT! /dev/disk/by-uuid/xxxxxxxxx does not exist. Dropping to a shell
-initramfs:_
+    ALERT! /dev/disk/by-uuid/xxxxxxxxx does not exist. Dropping to a shell initramfs:_
 
 没办法，继续检索，试验解决方案。
 
