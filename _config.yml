@@ -1,6 +1,6 @@
 # Site settings
 title: 小陈的博客 - Github.io
-email: chenzhh3671@163.com
+email: chenzhh3671@gmail.com
 description: 小陈的博客
 # > # this means to ignore newlines until "baseurl:"
 #   Write an awesome description for your new site here. You can edit this
@@ -11,7 +11,7 @@ description: 小陈的博客
 # url: "http://yourdomain.com" # the base hostname & protocol for your site
 # twitter_username: jekyllrb
 github_username:  dc3671
-permalink: /:year/:month/:day/:title/
+permalink: /:year-:month-:day/:title/
 
 # Build settings
 markdown: kramdown
