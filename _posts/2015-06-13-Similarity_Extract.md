@@ -2,7 +2,7 @@
 layout: post
 title:  "相似抽取"
 date:   2015-06-13 12:00:00
-categories: Algorithm
+categories: algorithm
 excerpt: Similarity Extract 相似抽取 字符串
 ---
 

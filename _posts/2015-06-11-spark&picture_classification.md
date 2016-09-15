@@ -2,7 +2,7 @@
 layout: post
 title:  "基于EMR及Spark运行Picture Classification"
 date:   2015-06-11 12:00:00
-categories: Spark
+categories: other
 excerpt: AWS EMR Spark PictureClassification Amazon
 ---
 
@@ -31,7 +31,7 @@ openjdk的问题，出现64位机器依赖32位包的情况
 ### 数据转换成json
 
 read all the images into memory as RDD and my method is as following:
-    
+
     val images = spark.wholeTextFiles("hdfs://imag-dir/")
 
 合并一维numpy.array：
@@ -43,7 +43,7 @@ read all the images into memory as RDD and my method is as following:
     np.append(a,b,0)
 
 二维numpy.array转list，为了作为json存储：
-    
+
     a.tolist()
 
 运行过程出错，cPickle依赖pylearn2

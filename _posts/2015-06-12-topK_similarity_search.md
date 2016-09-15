@@ -2,7 +2,7 @@
 layout: post
 title:  "前K个最相似字符串的相似搜索"
 date:   2015-06-12 12:00:00
-categories: Algorithm
+categories: algorithm
 excerpt: Similarity Search topK 相似搜索 字符串
 ---
 

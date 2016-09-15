@@ -2,7 +2,7 @@
 layout: post
 title:  "Fedora分区扩容以及如何修复引导"
 date:   2015-06-09 13:54:19
-categories: Linux
+categories: system
 excerpt: 分区扩容 修复引导 引导 grub linux 扩容 Fedora
 ---
 
@@ -42,7 +42,7 @@ normal
 </code></pre>
 
 5.便进入之前的引导界面了。
- 
+
 但是这只是临时的办法，还需要修复grub之后才能完全解决这一问题，否则重启还会出现一样的界面。这里我因为还要进行扩容，所以就没有直接修复grub，而是先研究扩容去了。
 
 既然grub的问题可以解决，那么我就更大胆了，直接在windows下，用diskdirector将swap分区移动到空闲分区右边，使得空闲分区与linux主分区相邻，便于之后的扩容。
