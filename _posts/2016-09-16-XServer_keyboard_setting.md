@@ -9,7 +9,7 @@ excerpt:
 * content
 {:toc}
 
-** 一
+##一
 
 首先是键盘映射问题，在系统设置中交换CapsLk与LeftCtrl经常遇到重启后设置失效的问题，今天检索之后，找到了强制设置的方法：
 
@@ -26,7 +26,7 @@ EndSection
 
 [Link](https://wiki.archlinux.org/index.php/Keyboard_configuration_in_Xorg#Frequently_used_XKB_options)
 
-** 二
+##二
 
 fcitx输入法问题，在`~/.xprofile`中添加以下内容：
 
